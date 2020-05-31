@@ -7,6 +7,12 @@
 <style scoped>
 h3 {
   margin: 40px 0 0;
+  padding: 20px 0px 20px 20px;
+  font-weight: 800;
+  font-size: 38px;
+  background-color: rgb(212, 189, 157);
+  display: flex;
+  justify-content: space-between;
 }
 /* ちょっと残してあります。 */
 /* ul {
