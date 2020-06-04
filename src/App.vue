@@ -37,8 +37,34 @@ export default {
     }
   },
   mounted() {
-    for(let i = 1; i < 53; i++) {
-      this.trumps.push(require(`../src/assets/images/trump/${i}.gif`));
+    for(let i = 0; i < 53; i++) {
+      console.log(i);
+      if(0 < i && i < 14) {//1-13
+        trump.trumpInfo.frontRed.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.frontRed.back = require(`../src/assets/images/trump/z01.gif`);
+        console.log('black');
+      }
+      if(13 < i && i < 40) {//14-39
+        trump.trumpInfo.frontRed.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.frontRed.back = require(`../src/assets/images/trump/z02.gif`);
+        console.log('red');
+      }
+      if(39 < i && i < 53) {//40-52
+        trump.trumpInfo.frontRed.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.frontRed.back = require(`../src/assets/images/trump/z01.gif`);
+        console.log('black');
+      }
+      let trump = {
+        isOpen: false,
+        trumpInfo: {
+          frontRed: 
+          { 
+            front: '',
+            back: ''
+          }
+        }
+      };
+      this.trumps.push(trump);
     }
     this.trumps.push(require(`../src/assets/images/trump/x01.gif`));
     this.trumps.push(require(`../src/assets/images/trump/x02.gif`));
