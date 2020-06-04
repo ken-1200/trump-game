@@ -7,7 +7,7 @@
     <div class="container">
         <transition-group name="shuffle" tag="div" class="inner-box">
           <div class="box-items" v-for="(trump, index) in trumps" :key="index">
-            <img :src="trump.isOpen ? trump.trumpInfo.frontRed.front : trump.trumpInfo.frontRed.back">
+            <img :src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back">
           </div>
       </transition-group>
     </div>
