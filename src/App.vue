@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted() {
-    for(let i = 0; i < 53; i++) {
+    for(let i = 0; i < 55; i++) {
       console.log(i);
       if(0 < i && i < 14) {//1-13
         trump.trumpInfo.frontRed.front = require(`../src/assets/images/trump/${i}.gif`);
