@@ -77,7 +77,49 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* fade-move */
+.fade-move {
+  transition: transform 1s;
+}
+/* shuffle-transition */
+.shuffle-enter{
+  /* 現れる時の最初の状態 */
+  opacity: 0;
+}
+.shuffle-enter-active{
+  /* 現れる時のトランジションの状態 */
+  transition: opacity 3s;
+}
+.shuffle-enter-to{
+  /* 現れる時の最後の状態 */
+  opacity: 1;
+}
+.shuffle-leave{
+  /* 消える時の最初の状態 */
+  opacity: 1;
+}
+.shuffle-leave-active{
+  /* 消えるときのトランジションの状態 */
+  transition: opacity 3s;
+}
+.shuffle-leave-to{
+  /* 消えるときの最後の状態 */
+  opacity: 0;
+}
+
+@keyframes sk-rotatetrumps {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
