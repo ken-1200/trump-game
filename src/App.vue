@@ -33,7 +33,7 @@ export default {
         this.trumps[rand] = temp;//random数を調整ex.)1-55まで
         leng -= 1;//0になるまで-1
       }
-    this.trumps.push();
+      this.trumps.push();
     }
   },
   mounted() {
@@ -66,10 +66,11 @@ export default {
       };
       this.trumps.push(trump);
     }
-    this.trumps.push(require(`../src/assets/images/trump/x01.gif`));
-    this.trumps.push(require(`../src/assets/images/trump/x02.gif`));
-    this.trumps.push(require(`../src/assets/images/trump/z01.gif`));
-    this.trumps.push(require(`../src/assets/images/trump/z02.gif`));
+    // this.trumps.push(trumpB);
+    // this.trumps.push(require(`../src/assets/images/trump/x01.gif`));
+    // this.trumps.push(require(`../src/assets/images/trump/x02.gif`));
+    // this.trumps.push(require(`../src/assets/images/trump/z01.gif`));
+    // this.trumps.push(require(`../src/assets/images/trump/z02.gif`));
   },
   components: {
     Home
@@ -153,15 +154,20 @@ button:hover {
 }
 
 .container {
+  background-color: rgb(252, 244, 235);
+}
+
+.inner-box {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  list-style-type: none;
-  background-color: rgb(252, 244, 235);
 }
+
 .box-items {
   margin: 0 10px;
   padding: 10px 0;
+  animation: sk-rotatetrumps 3s ease-in-out forwards;
+  animation-delay: 0.74s;
 }
 
 img {
