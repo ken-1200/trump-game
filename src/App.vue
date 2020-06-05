@@ -7,7 +7,7 @@
     <div class="container">
         <transition-group name="shuffle" tag="div" class="inner-box">
           <div class="box-items" v-for="(trump, index) in trumps" :key="index">
-            <img :src="trump.isOpen ? trump.trumpInfo.frontRed.front : trump.trumpInfo.frontRed.back">
+            <img :src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back">
           </div>
       </transition-group>
     </div>
@@ -37,40 +37,42 @@ export default {
     }
   },
   mounted() {
-    for(let i = 0; i < 53; i++) {
+    for(let i = 0; i < 55; i++) {
       console.log(i);
       if(0 < i && i < 14) {//1-13
-        trump.trumpInfo.frontRed.front = require(`../src/assets/images/trump/${i}.gif`);
-        trump.trumpInfo.frontRed.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
         console.log('black');
       }
       if(13 < i && i < 40) {//14-39
-        trump.trumpInfo.frontRed.front = require(`../src/assets/images/trump/${i}.gif`);
-        trump.trumpInfo.frontRed.back = require(`../src/assets/images/trump/z02.gif`);
+        trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
         console.log('red');
       }
       if(39 < i && i < 53) {//40-52
-        trump.trumpInfo.frontRed.front = require(`../src/assets/images/trump/${i}.gif`);
-        trump.trumpInfo.frontRed.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
         console.log('black');
       }
+      if(52 === i) {//jokerBlack
+        trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        console.log('blackJoker');
+      }
+      if(53 === i) {//jokerRed
+        trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
+        console.log('redJoker');
+      }
       let trump = {
-        isOpen: false,
+        isOpen: true,
         trumpInfo: {
-          frontRed: 
-          { 
-            front: '',
-            back: ''
-          }
+          front: '',
+          back: ''
         }
       };
       this.trumps.push(trump);
     }
-    // this.trumps.push(trumpB);
-    // this.trumps.push(require(`../src/assets/images/trump/x01.gif`));
-    // this.trumps.push(require(`../src/assets/images/trump/x02.gif`));
-    // this.trumps.push(require(`../src/assets/images/trump/z01.gif`));
-    // this.trumps.push(require(`../src/assets/images/trump/z02.gif`));
   },
   components: {
     Home
@@ -84,29 +86,20 @@ export default {
   transition: transform 1s;
 }
 /* shuffle-transition */
-.shuffle-enter{
-  /* 現れる時の最初の状態 */
+.shuffle-enter, 
+.shuffle-leave-to {
+  /* 現れる時の最初の状態, 消えるときの最後の状態 */
   opacity: 0;
 }
-.shuffle-enter-active{
-  /* 現れる時のトランジションの状態 */
+.shuffle-enter-active,
+.shuffle-leave-active {
+  /* 現れる時のトランジションの状態, 消えるときのトランジションの状態 */
   transition: opacity 3s;
 }
-.shuffle-enter-to{
-  /* 現れる時の最後の状態 */
+.shuffle-enter-to,
+.shuffle-leave {
+  /* 現れる時の最後の状態, 消える時の最初の状態 */
   opacity: 1;
-}
-.shuffle-leave{
-  /* 消える時の最初の状態 */
-  opacity: 1;
-}
-.shuffle-leave-active{
-  /* 消えるときのトランジションの状態 */
-  transition: opacity 3s;
-}
-.shuffle-leave-to{
-  /* 消えるときの最後の状態 */
-  opacity: 0;
 }
 
 @keyframes sk-rotatetrumps {
@@ -166,8 +159,8 @@ button:hover {
 .box-items {
   margin: 0 10px;
   padding: 10px 0;
-  animation: sk-rotatetrumps 3s ease-in-out forwards;
-  animation-delay: 0.74s;
+  /* animation: sk-rotatetrumps 3s ease-in-out forwards; */
+  /* animation-delay: 0.74s; */
 }
 
 img {
