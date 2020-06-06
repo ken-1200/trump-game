@@ -6,7 +6,7 @@
     </div>
     <div class="container">
         <transition-group name="shuffle" tag="div" class="inner-box">
-          <div class="box-items" v-for="(trump, index) in trumps" :key="index">
+          <div class="box-items" v-for="(trump, index) in trumps" :key="index" @click="open(trump, index)">
             <img :src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back">
           </div>
       </transition-group>
@@ -24,6 +24,11 @@ export default {
     }
   },
   methods: {
+    open(trump, index) {
+      trump.isOpen ? trump.isOpen = false : trump.isOpen = true;
+      console.log(trump.isOpen);
+      console.log(index);
+    },
     shuffle() {
       var leng = this.trumps.length;//lengthをとる
       while(leng > 0) {
@@ -54,15 +59,15 @@ export default {
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
         console.log('black');
       }
-      if(52 === i) {//jokerBlack
+      if(53 === i) {//jokerBlack
         trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
-        console.log('red');
+        console.log('blackJoker');
       }
-      if(53 === i) {//jokerRed
+      if(54 === i) {//jokerRed
         trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
-        console.log('black');
+        console.log('redJoker');
       }
       let trump = {
         isOpen: true,
@@ -159,8 +164,8 @@ button:hover {
 .box-items {
   margin: 0 10px;
   padding: 10px 0;
-  animation: sk-rotatetrumps 3s ease-in-out forwards;
-  animation-delay: 0.74s;
+  /* animation: sk-rotatetrumps 3s ease-in-out forwards; */
+  /* animation-delay: 0.74s; */
 }
 
 img {
