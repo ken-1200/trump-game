@@ -5,9 +5,11 @@
       <button @click="shuffle">シャッフル</button>
     </div>
     <div class="container">
-      <div class="box-items" v-for="(trump, index) in trumps" :key="index">
-        <img :src="trump">
-    </div>
+        <transition-group name="shuffle" tag="div" class="inner-box">
+          <div class="box-items" v-for="(trump, index) in trumps" :key="index">
+            <img :src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back">
+          </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -31,17 +33,46 @@ export default {
         this.trumps[rand] = temp;//random数を調整ex.)1-55まで
         leng -= 1;//0になるまで-1
       }
-    this.trumps.push();
+      this.trumps.push();
     }
   },
   mounted() {
-    for(let i = 1; i < 53; i++) {
-      this.trumps.push(require(`../src/assets/images/trump/${i}.gif`));
+    for(let i = 0; i < 55; i++) {
+      console.log(i);
+      if(0 < i && i < 14) {//1-13
+        trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        console.log('black');
+      }
+      if(13 < i && i < 40) {//14-39
+        trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
+        console.log('red');
+      }
+      if(39 < i && i < 53) {//40-52
+        trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        console.log('black');
+      }
+      if(52 === i) {//jokerBlack
+        trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        console.log('red');
+      }
+      if(53 === i) {//jokerRed
+        trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
+        trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
+        console.log('black');
+      }
+      let trump = {
+        isOpen: true,
+        trumpInfo: {
+          front: '',
+          back: ''
+        }
+      };
+      this.trumps.push(trump);
     }
-    this.trumps.push(require(`../src/assets/images/trump/x01.gif`));
-    this.trumps.push(require(`../src/assets/images/trump/x02.gif`));
-    this.trumps.push(require(`../src/assets/images/trump/z01.gif`));
-    this.trumps.push(require(`../src/assets/images/trump/z02.gif`));
   },
   components: {
     Home
@@ -49,7 +80,40 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* fade-move */
+.fade-move {
+  transition: transform 1s;
+}
+/* shuffle-transition */
+.shuffle-enter, 
+.shuffle-leave-to {
+  /* 現れる時の最初の状態, 消えるときの最後の状態 */
+  opacity: 0;
+}
+.shuffle-enter-active,
+.shuffle-leave-active {
+  /* 現れる時のトランジションの状態, 消えるときのトランジションの状態 */
+  transition: opacity 3s;
+}
+.shuffle-enter-to,
+.shuffle-leave {
+  /* 現れる時の最後の状態, 消える時の最初の状態 */
+  opacity: 1;
+}
+
+@keyframes sk-rotatetrumps {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -83,15 +147,20 @@ button:hover {
 }
 
 .container {
+  background-color: rgb(252, 244, 235);
+}
+
+.inner-box {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  list-style-type: none;
-  background-color: rgb(252, 244, 235);
 }
+
 .box-items {
   margin: 0 10px;
   padding: 10px 0;
+  animation: sk-rotatetrumps 3s ease-in-out forwards;
+  animation-delay: 0.74s;
 }
 
 img {
