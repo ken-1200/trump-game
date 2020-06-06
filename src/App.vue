@@ -59,12 +59,12 @@ export default {
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
         console.log('black');
       }
-      if(52 === i) {//jokerBlack
+      if(53 === i) {//jokerBlack
         trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
         console.log('blackJoker');
       }
-      if(53 === i) {//jokerRed
+      if(54 === i) {//jokerRed
         trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
         console.log('redJoker');
