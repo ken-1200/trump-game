@@ -24,6 +24,11 @@ export default {
     }
   },
   methods: {
+    open(trump, index) {
+      trump.isOpen ? trump.isOpen = false : trump.isOpen = true;
+      console.log(trump.isOpen);
+      console.log(index);
+    },
     shuffle() {
       var leng = this.trumps.length;//lengthをとる
       while(leng > 0) {
