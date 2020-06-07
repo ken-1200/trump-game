@@ -26,8 +26,12 @@ export default {
   },
   methods: {
     open(trump, index) {
-      trump.isOpen ? trump.isOpen = false : trump.isOpen = true;
-      console.log(trump.isOpen);
+      if(this.openCounter + 1 > 2) return;//2枚以上押せないようにする
+      trump.isOpen ? trump.isOpen = false : trump.isOpen = true;//めくる処理
+      this.openCounter++;
+      if(this.openCounter === 2) {//resetメソッドを呼ぶ
+        this.reset(trump);
+      }
       console.log(index);
     },
     shuffle() {
