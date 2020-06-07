@@ -20,7 +20,8 @@ import Home from './components/Home.vue'
 export default {
   data() {
     return {
-      trumps: []
+      trumps: [],
+      openCounter: 0
     }
   },
   methods: {
