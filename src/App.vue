@@ -56,34 +56,28 @@ export default {
   },
   mounted() {
     for(let i = 0; i < 55; i++) {
-      console.log(i);
       if(0 < i && i < 14) {//1-13
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
-        console.log('black');
       }
       if(13 < i && i < 40) {//14-39
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
-        console.log('red');
       }
       if(39 < i && i < 53) {//40-52
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
-        console.log('black');
       }
       if(53 === i) {//jokerBlack
         trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
-        console.log('blackJoker');
       }
       if(54 === i) {//jokerRed
         trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
-        console.log('redJoker');
       }
       let trump = {
-        isOpen: true,
+        isOpen: false,
         trumpInfo: {
           front: '',
           back: ''
