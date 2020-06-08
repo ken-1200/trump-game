@@ -44,8 +44,9 @@ export default {
   },
     reset() {
       setTimeout(() => {
-        this.trumps.forEach((trump) => {//forEachで各配列の要素trump.isOpen = false
-          trump.isOpen = false;
+        this.trumps.forEach((trump) => {//forEachで各配列の要素
+          if(trump.isOpen && trump.isGet == null) {//true && null
+            trump.isOpen = false;
         });
         this.openCounter = 0;//初期化
       }, 2000);
