@@ -27,6 +27,21 @@ export default {
     }
   },
   methods: {
+    isMatch() {
+      let openTrumps = [];
+      this.trumps.forEach((trump) => {//forEachで各配列の要素
+        if(trump.isOpen && trump.isGet == null) {//true && null / 表 && まだ誰も取っていない
+          openTrumps.push(trump);
+        }
+      });
+      let firstId = openTrumps[0];//１枚目
+      let secondId = openTrumps[1];//２枚目
+      let abs = ((firstId.trumpInfo.id + 13) - (secondId.trumpInfo.id + 13));//絶対値の判定
+      if(abs % 13 === 0) {//13の倍数
+        firstId.isGet = this.player;
+        secondId.isGet = this.player;
+      }
+  },
     reset() {
       setTimeout(() => {
         this.trumps.forEach((trump) => {//forEachで各配列の要素trump.isOpen = false
