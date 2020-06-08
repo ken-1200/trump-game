@@ -41,7 +41,7 @@ export default {
         firstId.isGet = this.player;
         secondId.isGet = this.player;
       }
-  },
+    },
     reset() {
       setTimeout(() => {
         this.trumps.forEach((trump) => {//forEachで各配列の要素
