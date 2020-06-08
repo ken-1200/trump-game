@@ -52,7 +52,7 @@ export default {
         this.openCounter = 0;//初期化
       }, 2000);
     },
-    open(trump, index) {
+    open(trump) {
       if(this.openCounter + 1 > 2) return;//2枚以上押せないようにする
       trump.isOpen ? trump.isOpen = false : trump.isOpen = true;//めくる処理
       this.openCounter++;
@@ -60,7 +60,6 @@ export default {
         this.isMatch(trump);
         this.reset(trump);
       }
-      console.log(index);
     },
     shuffle() {
       var leng = this.trumps.length;//lengthをとる
