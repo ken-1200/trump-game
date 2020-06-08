@@ -47,6 +47,7 @@ export default {
         this.trumps.forEach((trump) => {//forEachで各配列の要素
           if(trump.isOpen && trump.isGet == null) {//true && null
             trump.isOpen = false;
+          }
         });
         this.openCounter = 0;//初期化
       }, 2000);
@@ -78,28 +79,35 @@ export default {
       if(0 < i && i < 14) {//1-13
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.id = i;
       }
       if(13 < i && i < 40) {//14-39
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
+        trump.trumpInfo.id = i;
       }
       if(39 < i && i < 53) {//40-52
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.id = i;
       }
       if(53 === i) {//jokerBlack
         trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.id = i;
       }
       if(54 === i) {//jokerRed
         trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
+        trump.trumpInfo.id = i;
       }
       let trump = {
         isOpen: false,
+        isGet: null,
         trumpInfo: {
           front: '',
-          back: ''
+          back: '',
+          id: ''
         }
       };
       this.trumps.push(trump);
