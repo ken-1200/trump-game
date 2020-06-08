@@ -21,7 +21,9 @@ export default {
   data() {
     return {
       trumps: [],
-      openCounter: 0
+      openCounter: 0,
+      player: "player",
+      computer: "computer"
     }
   },
   methods: {
