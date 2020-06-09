@@ -4,6 +4,7 @@
     <div class="btn">
       <button @click="shuffle">シャッフル</button>
     </div>
+    <span>あなたが取得したトランプ{{ getPairs }}組</span>
     <div class="container">
         <transition-group name="shuffle" tag="div" class="inner-box">
           <div class="box-items" v-for="(trump, index) in trumps" :key="index" @click="open(trump, index)">
