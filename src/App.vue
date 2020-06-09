@@ -26,6 +26,18 @@ export default {
       computer: "computer"
     }
   },
+  computed: {
+    getPairs() { 
+      console.log(this.trumps);
+      console.log(this.trumps.filter(kkkkk => {return kkkkk.isGet=== this.player;}));
+      if(!this.trumps || this.trumps.length === 0) return;//全ての組みを取り終わった時
+      return (
+        this.trumps.filter(trump => {//配列をフィルタリング(引数に与えられた関数を実行して、この条件と一致している全ての配列要素からなる新しい配列を生成する)
+          return trump.isGet === this.player;
+        }).length / 2
+      );
+    }
+  },
   methods: {
     isMatch() {
       let openTrumps = [];
