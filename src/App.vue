@@ -54,6 +54,10 @@ export default {
         firstId.isGet = this.player;
         secondId.isGet = this.player;
       }
+      if(firstId.trumpInfo.id === 53 && secondId.trumpInfo.id === 54) {
+        firstId.isGet = this.player;
+        secondId.isGet = this.player;
+      }
     },
     reset() {
       setTimeout(() => {
