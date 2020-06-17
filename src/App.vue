@@ -138,21 +138,13 @@ export default {
       if(53 === i) {//jokerBlack
         trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
-        trump.trumpInfo.id = i;
+        trump.trumpInfo.id = 'jokerBlack';
       }
       if(54 === i) {//jokerRed
         trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
-        trump.trumpInfo.id = i;
+        trump.trumpInfo.id = 'jokerRed';
       }
-      let trump = {
-        isOpen: false,
-        isGet: null,
-        trumpInfo: {
-          front: '',
-          back: '',
-          id: ''
-        }
       };
       this.trumps.push(trump);
     }
