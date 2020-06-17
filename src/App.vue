@@ -177,7 +177,7 @@ export default {
 .shuffle-enter-active,
 .shuffle-leave-active {
   /* 現れる時のトランジションの状態, 消えるときのトランジションの状態 */
-  transition: opacity 3s;
+  transition: opacity 1s;
 }
 .shuffle-enter-to,
 .shuffle-leave {
@@ -276,8 +276,9 @@ button:hover {
 }
 
 img {
-  width: 100%;
-  border-radius: 15px;
+  height: 114px;
+  object-fit: contain;
+  border-radius: 6px;
   box-shadow: 0px 15px 12px 0px #2c3e50;
 }
 
