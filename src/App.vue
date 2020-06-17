@@ -119,7 +119,16 @@ export default {
     }
   },
   mounted() {
-    for(let i = 0; i < 55; i++) {
+    for(let i = 1; i < 55; i++) {
+      let trump = {
+        isOpen: false,
+        isGet: null,
+        trumpInfo: {
+          front: '',
+          back: '',
+          id: ''
+        }
+      }
       if(0 < i && i < 14) {//1-13
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
