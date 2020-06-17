@@ -68,6 +68,60 @@ export default {
     }
   },
   methods: {
+    isComputer() {
+      let comOpenTrumps = [];
+      this.trumps.forEach((trump) => {
+        if(trump.isGet == null) {
+          comOpenTrumps.push(trump);
+        }
+      });
+      let firstRanId = Math.floor(Math.random() * comOpenTrumps.length);//その長さを54ランダム
+      let secondRanId = Math.floor(Math.random() * comOpenTrumps.length);
+      if(firstRanId == secondRanId) {//もし同じランダムになったらもう一度
+        firstRanId = Math.floor(Math.random() * comOpenTrumps.length);//その長さを54ランダム
+        secondRanId = Math.floor(Math.random() * comOpenTrumps.length);
+        if(firstRanId == secondRanId) {
+          alert('リロードしてください！');
+        }
+      }
+      let firstComId = comOpenTrumps[firstRanId];
+      let secondComId = comOpenTrumps[secondRanId];
+      let computerFirst = [];
+      let computerSecond = [];
+      comOpenTrumps.forEach((comTrumps) => {
+        setTimeout(() => {
+          if(firstComId.trumpInfo.id === comTrumps.trumpInfo.id) { 
+            comTrumps.isOpen = true; 
+          }
+          if(secondComId.trumpInfo.id === comTrumps.trumpInfo.id) { 
+            comTrumps.isOpen = true;  
+          }
+          let abs = ((firstComId.trumpInfo.id + 13) - (secondComId.trumpInfo.id + 13));
+          if(abs % 13 === 0) {
+            if(firstComId.trumpInfo.id === comTrumps.trumpInfo.id) {//randomの数値と同じidのトランプの時に表 1枚目
+              comTrumps.isGet = this.computer;
+              computerFirst.push(comTrumps);
+              computerFirst.forEach((trumps) => {
+                this.isMatchComputer.push(trumps);
+              });
+            }
+            if(secondComId.trumpInfo.id === comTrumps.trumpInfo.id) {//2枚目
+              comTrumps.isGet = this.computer;
+              computerSecond.push(comTrumps);
+              computerSecond.forEach((trumps) => {
+                this.isMatchComputer.push(trumps);
+              });
+            }
+          }else {
+            if(abs % 13 !== 0) {//マッチしていない時
+              this.isNotMatchTrump.push(firstComId);
+              this.isNotMatchTrump.push(secondComId);
+            }
+            this.reset();
+          }
+        }, 2300);
+      });
+    },
     isMatch() {
       let openTrumps = [];
       this.trumps.forEach((trump) => {//forEachで各配列の要素
