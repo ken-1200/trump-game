@@ -89,13 +89,13 @@ export default {
     },
     reset() {
       setTimeout(() => {
-        this.trumps.forEach((trump) => {//forEachで各配列の要素
-          if(trump.isOpen && trump.isGet == null) {//true && null
+        this.isNotMatchTrump.forEach((trump) => {
+          if(trump.isOpen && trump.isGet == null) {
             trump.isOpen = false;
           }
         });
         this.openCounter = 0;//初期化
-      }, 2000);
+      }, 1200);
     },
     open(trump) {
       if(this.openCounter + 1 > 2) return;//2枚以上押せないようにする
