@@ -25,10 +25,10 @@
           </transition-group>
         </div>
       </div>
-        <transition-group name="shuffle" tag="div" class="inner-box">
-          <div class="box-items" v-for="(trump, index) in trumps" :key="index" @click="open(trump, index)">
-            <img :src="(trump.isOpen || trump.isGet != null) ? trump.trumpInfo.front : trump.trumpInfo.back">
-          </div>
+      <transition-group name="shuffle" tag="div" class="inner-box">
+        <div class="box-items" v-for="(trump, index) in trumps" :key="index" @click="open(trump)" v-show="trump.isGet == null">
+          <img :src="(trump.isOpen || trump.isGet != null) ? trump.trumpInfo.front : trump.trumpInfo.back">
+        </div>
       </transition-group>
     </div>
   </div>
@@ -173,7 +173,6 @@ export default {
         this.openCounter = 0;
       }else if(this.openCounter == 2) {//2回目
         this.isMatch(trump);
-        this.reset(trump);
       }
     },
     shuffle() {
@@ -224,7 +223,6 @@ export default {
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
         trump.trumpInfo.id = 'jokerRed';
       }
-      };
       this.trumps.push(trump);
     }
   },
@@ -254,18 +252,6 @@ export default {
 .shuffle-leave {
   /* 現れる時の最後の状態, 消える時の最初の状態 */
   opacity: 1;
-}
-
-@keyframes sk-rotatetrumps {
-  0% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
 }
 
 #app {
@@ -342,8 +328,6 @@ button:hover {
 .box-items {
   margin: 0 10px;
   padding: 10px 0;
-  /* animation: sk-rotatetrumps 3s ease-in-out forwards; */
-  /* animation-delay: 0.74s; */
 }
 
 img {
