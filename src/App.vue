@@ -81,11 +81,25 @@ export default {
       if(abs % 13 === 0) {//13の倍数
         firstId.isGet = this.player;
         secondId.isGet = this.player;
+        openTrumps.forEach((matchTrump) => {
+          this.isMatchTrump.push(matchTrump);
+        });
       }
-      if(firstId.trumpInfo.id === 53 && secondId.trumpInfo.id === 54) {
+      if(firstId.trumpInfo.id === 'jokerBlack' && secondId.trumpInfo.id === 'jokerRed') {
         firstId.isGet = this.player;
         secondId.isGet = this.player;
+        openTrumps.forEach((matchTrump) => {
+          this.isMatchTrump.push(matchTrump);
+        });
+      }else {
+        if(abs % 13 !== 0) {//マッチしていない時
+          openTrumps.forEach((noMacthTrumps) => {
+            this.isNotMatchTrump.push(noMacthTrumps);
+          });
+          this.isComputer();//相手
+        }
       }
+      this.reset();
     },
     reset() {
       setTimeout(() => {
