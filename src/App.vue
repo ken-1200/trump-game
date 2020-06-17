@@ -9,6 +9,22 @@
       <span class="computer">相手が取得したトランプ{{ getComputers }}組</span>
     </div>
     <div class="container">
+      <div class="get-trumps">
+        <div class="inner-boxs">
+          <transition-group name="shuffle" tag="div" class="inner-items">
+            <div class="box-items" v-for="(match, index) in isMatchTrump" :key="index">
+              <img class="img-match" :src="match.trumpInfo.front">
+            </div>
+          </transition-group>
+        </div>
+        <div class="inner-computer">
+          <transition-group name="shuffle" tag="div" class="inner-items">
+            <div class="box-items" v-for="(match, index) in isMatchComputer" :key="index">
+              <img class="img-match" :src="match.trumpInfo.front">
+            </div>
+          </transition-group>
+        </div>
+      </div>
         <transition-group name="shuffle" tag="div" class="inner-box">
           <div class="box-items" v-for="(trump, index) in trumps" :key="index" @click="open(trump, index)">
             <img :src="(trump.isOpen || trump.isGet != null) ? trump.trumpInfo.front : trump.trumpInfo.back">
@@ -25,6 +41,9 @@ export default {
   data() {
     return {
       trumps: [],
+      isMatchTrump: [],
+      isMatchComputer: [],
+      isNotMatchTrump: [],
       openCounter: 0,
       player: "player",
       computer: "computer"
@@ -210,6 +229,35 @@ button:hover {
   box-shadow: 5px 5px 10px 0 #2c3e50;
 }
 
+.result {
+  position: relative;
+}
+
+.get-trumps {
+  position: relative;
+}
+
+.inner-computer {
+  width: 50%;
+  height: 250px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.player {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.computer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 50%;
+}
+
 .container {
   background-color: rgb(252, 244, 235);
 }
@@ -231,5 +279,26 @@ img {
   width: 100%;
   border-radius: 15px;
   box-shadow: 0px 15px 12px 0px #2c3e50;
+}
+
+.inner-boxs {
+  width: 50%;
+  height: 250px;
+}
+
+.inner-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 50%;
+  height: 250px;
+}
+
+.img-match {
+  position: absolute;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0px 6px 12px 0px #a7a8aa;
 }
 </style>
