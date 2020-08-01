@@ -28,9 +28,7 @@ export default {
     }
   },
   computed: {
-    getPairs() { 
-      console.log(this.trumps);
-      console.log(this.trumps.filter(kkkkk => {return kkkkk.isGet=== this.player;}));
+    getPairs() {
       if(!this.trumps || this.trumps.length === 0) return;//全ての組みを取り終わった時
       return (
         this.trumps.filter(trump => {//配列をフィルタリング(引数に与えられた関数を実行して、この条件と一致している全ての配列要素からなる新しい配列を生成する)
@@ -51,6 +49,10 @@ export default {
       let secondId = openTrumps[1];//２枚目
       let abs = ((firstId.trumpInfo.id + 13) - (secondId.trumpInfo.id + 13));//絶対値の判定
       if(abs % 13 === 0) {//13の倍数
+        firstId.isGet = this.player;
+        secondId.isGet = this.player;
+      }
+      if(firstId.trumpInfo.id === 53 && secondId.trumpInfo.id === 54) {
         firstId.isGet = this.player;
         secondId.isGet = this.player;
       }
