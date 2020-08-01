@@ -4,6 +4,7 @@
     <div class="btn">
       <button @click="shuffle">シャッフル</button>
     </div>
+    <span>あなたが取得したトランプ{{ getPairs }}組</span>
     <div class="container">
         <transition-group name="shuffle" tag="div" class="inner-box">
           <div class="box-items" v-for="(trump, index) in trumps" :key="index" @click="open(trump, index)">
@@ -24,6 +25,18 @@ export default {
       openCounter: 0,
       player: "player",
       computer: "computer"
+    }
+  },
+  computed: {
+    getPairs() { 
+      console.log(this.trumps);
+      console.log(this.trumps.filter(kkkkk => {return kkkkk.isGet=== this.player;}));
+      if(!this.trumps || this.trumps.length === 0) return;//全ての組みを取り終わった時
+      return (
+        this.trumps.filter(trump => {//配列をフィルタリング(引数に与えられた関数を実行して、この条件と一致している全ての配列要素からなる新しい配列を生成する)
+          return trump.isGet === this.player;
+        }).length / 2
+      );
     }
   },
   methods: {
