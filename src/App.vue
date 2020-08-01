@@ -7,7 +7,7 @@
     <div class="container">
         <transition-group name="shuffle" tag="div" class="inner-box">
           <div class="box-items" v-for="(trump, index) in trumps" :key="index" @click="open(trump, index)">
-            <img :src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back">
+            <img :src="(trump.isOpen || trump.isGet != null) ? trump.trumpInfo.front : trump.trumpInfo.back">
           </div>
       </transition-group>
     </div>
@@ -21,26 +21,45 @@ export default {
   data() {
     return {
       trumps: [],
-      openCounter: 0
+      openCounter: 0,
+      player: "player",
+      computer: "computer"
     }
   },
   methods: {
+    isMatch() {
+      let openTrumps = [];
+      this.trumps.forEach((trump) => {//forEachで各配列の要素
+        if(trump.isOpen && trump.isGet == null) {//true && null / 表 && まだ誰も取っていない
+          openTrumps.push(trump);
+        }
+      });
+      let firstId = openTrumps[0];//１枚目
+      let secondId = openTrumps[1];//２枚目
+      let abs = ((firstId.trumpInfo.id + 13) - (secondId.trumpInfo.id + 13));//絶対値の判定
+      if(abs % 13 === 0) {//13の倍数
+        firstId.isGet = this.player;
+        secondId.isGet = this.player;
+      }
+    },
     reset() {
       setTimeout(() => {
-        this.trumps.forEach((trump) => {//forEachで各配列の要素trump.isOpen = false
-          trump.isOpen = false;
+        this.trumps.forEach((trump) => {//forEachで各配列の要素
+          if(trump.isOpen && trump.isGet == null) {//true && null
+            trump.isOpen = false;
+          }
         });
         this.openCounter = 0;//初期化
       }, 2000);
     },
-    open(trump, index) {
+    open(trump) {
       if(this.openCounter + 1 > 2) return;//2枚以上押せないようにする
       trump.isOpen ? trump.isOpen = false : trump.isOpen = true;//めくる処理
       this.openCounter++;
-      if(this.openCounter === 2) {//resetメソッドを呼ぶ
+      if(this.openCounter == 2) {//2回目
+        this.isMatch(trump);
         this.reset(trump);
       }
-      console.log(index);
     },
     shuffle() {
       var leng = this.trumps.length;//lengthをとる
@@ -59,28 +78,35 @@ export default {
       if(0 < i && i < 14) {//1-13
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.id = i;
       }
       if(13 < i && i < 40) {//14-39
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
+        trump.trumpInfo.id = i;
       }
       if(39 < i && i < 53) {//40-52
         trump.trumpInfo.front = require(`../src/assets/images/trump/${i}.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.id = i;
       }
       if(53 === i) {//jokerBlack
         trump.trumpInfo.front = require(`../src/assets/images/trump/x02.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z01.gif`);
+        trump.trumpInfo.id = i;
       }
       if(54 === i) {//jokerRed
         trump.trumpInfo.front = require(`../src/assets/images/trump/x01.gif`);
         trump.trumpInfo.back = require(`../src/assets/images/trump/z02.gif`);
+        trump.trumpInfo.id = i;
       }
       let trump = {
         isOpen: false,
+        isGet: null,
         trumpInfo: {
           front: '',
-          back: ''
+          back: '',
+          id: ''
         }
       };
       this.trumps.push(trump);
